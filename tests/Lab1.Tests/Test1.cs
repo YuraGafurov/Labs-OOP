@@ -1,8 +1,8 @@
 using System.Collections.ObjectModel;
-using Itmo.ObjectOrientedProgramming.Lab1.Environments;
-using Itmo.ObjectOrientedProgramming.Lab1.Obstacles;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships;
-using Itmo.ObjectOrientedProgramming.Lab1.Ships.Entities;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Environments;
+using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
+using Itmo.ObjectOrientedProgramming.Lab1.SpaceShips.Entities.Ships;
+using Itmo.ObjectOrientedProgramming.Lab1.SpaceShips.Models;
 using Xunit;
 
 namespace Itmo.ObjectOrientedProgramming.Lab1.Tests;
