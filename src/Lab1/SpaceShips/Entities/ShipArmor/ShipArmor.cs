@@ -26,11 +26,16 @@ public class ShipArmor
 
     public int Hp { get; private set; }
 
-    public void TakeDamage(BaseObstacle obstacle)
+    public bool TakeDamage(IObstacle obstacle)
     {
-        if (obstacle.PhysDamage.HasValue)
+        Hp -= obstacle.Damage;
+        if (Hp > 0)
         {
-            Hp -= obstacle.PhysDamage.Value;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

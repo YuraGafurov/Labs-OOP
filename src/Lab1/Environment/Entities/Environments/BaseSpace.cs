@@ -8,9 +8,9 @@ public abstract class BaseSpace
     protected BaseSpace(int length)
     {
         Length = length;
-        Obstacles = new Collection<BaseObstacle>();
+        Obstacles = new Collection<IObstacle>();
     }
 
     public int Length { get; }
-    public Collection<BaseObstacle> Obstacles { get; }
+    public Collection<IObstacle> Obstacles { get; }
 }

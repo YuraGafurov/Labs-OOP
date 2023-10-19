@@ -32,20 +32,34 @@ public class Deflector
     public PhotonDeflector? PhotonDeflector { get; private set; }
     public int Hp { get; private set; }
 
-    public void TakeDamage(BaseObstacle obstacle)
+    public bool TakeDamage(IObstacle obstacle)
     {
-        if (obstacle.EnergyDamage.HasValue)
+        if (obstacle is IEnergyObstacle)
         {
             PhotonDeflector?.TakeDamage();
             if (PhotonDeflector?.Hp == 0)
             {
                 PhotonDeflector = null;
             }
-        }
 
-        if (obstacle.PhysDamage.HasValue)
+            return true;
+        }
+        else
         {
-            Hp -= obstacle.PhysDamage.Value;
+            Hp -= obstacle.Damage;
+            if (Hp > 0)
+            {
+                return true;
+            }
+            else if (Hp == 0)
+            {
+                return false;
+            }
+            else
+            {
+                obstacle.Damage -= Hp;
+                return false;
+            }
         }
     }
 }

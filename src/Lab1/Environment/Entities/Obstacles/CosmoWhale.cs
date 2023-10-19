@@ -1,11 +1,8 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 
-public class CosmoWhale : BaseObstacle
+public class CosmoWhale : IPhysObstacle
 {
     private const int DefaultDamage = 400;
 
-    public CosmoWhale()
-    {
-        PhysDamage = DefaultDamage;
-    }
+    public int Damage { get; set; } = DefaultDamage;
 }

@@ -1,11 +1,8 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 
-public class Meteor : BaseObstacle
+public class Meteor : IPhysObstacle
 {
     private const int DefaultDamage = 25;
 
-    public Meteor()
-    {
-        PhysDamage = DefaultDamage;
-    }
+    public int Damage { get; set; } = DefaultDamage;
 }

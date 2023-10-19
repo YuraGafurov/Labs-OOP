@@ -1,11 +1,8 @@
 namespace Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
 
-public class Asteroid : BaseObstacle
+public class Asteroid : IPhysObstacle
 {
     private const int DefaultDamage = 10;
 
-    public Asteroid()
-    {
-        PhysDamage = DefaultDamage;
-    }
+    public int Damage { get; set; } = DefaultDamage;
 }

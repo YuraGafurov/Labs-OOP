@@ -26,13 +26,18 @@ public abstract class BaseShip
 
     public abstract Results Move(Collection<BaseSpace> route);
 
-    public Results TakeDamage(Collection<BaseObstacle> obstacles)
+    public Results TakeDamage(Collection<IObstacle> obstacles)
     {
-        foreach (BaseObstacle obstacle in obstacles)
+        foreach (IObstacle obstacle in obstacles)
         {
-            if (obstacle.EnergyDamage.HasValue)
+            if (IsAntiNitrino.HasValue && obstacle is CosmoWhale)
             {
-                if (Deflector is not null && Deflector.PhotonDeflector is not null)
+                continue;
+            }
+
+            if (obstacle is IEnergyObstacle)
+            {
+                if (Deflector?.PhotonDeflector != null)
                 {
                     Deflector.TakeDamage(obstacle);
                 }
@@ -41,32 +46,27 @@ public abstract class BaseShip
                     return Results.CrewDeath;
                 }
             }
-            else
+            else if (obstacle is IPhysObstacle)
             {
-                if (IsAntiNitrino.HasValue && obstacle is CosmoWhale)
+                if (Deflector is not null)
                 {
-                    continue;
-                }
-
-                if (Deflector is not null && Deflector.Hp > obstacle.PhysDamage)
-                {
-                    Deflector.TakeDamage(obstacle);
-                }
-                else if (Deflector is not null && Deflector.Hp <= obstacle.PhysDamage)
-                {
-                    if (Deflector.Hp < obstacle.PhysDamage)
+                    if (!Deflector.TakeDamage(obstacle))
                     {
-                        obstacle.PhysDamage -= Deflector.Hp;
-                    }
-
-                    Deflector = null;
-                    if (Armor.Hp > obstacle.PhysDamage)
-                    {
-                        Armor.TakeDamage(obstacle);
+                        Deflector = null;
+                        if (obstacle.Damage > 0)
+                        {
+                            if (!Armor.TakeDamage(obstacle))
+                            {
+                                return Results.SpaceShipDestroyed;
+                            }
+                        }
                     }
                     else
                     {
-                        return Results.SpaceShipDestroyed;
+                        if (!Armor.TakeDamage(obstacle))
+                        {
+                            return Results.SpaceShipDestroyed;
+                        }
                     }
                 }
             }
