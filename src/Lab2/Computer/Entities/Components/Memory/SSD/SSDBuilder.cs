@@ -7,7 +7,7 @@ public class SSDBuilder
     private string? _name;
     private string? _connection;
     private int? _capacity;
-    private int? _maximumOperatingSpeed;
+    private int? _operatingSpeed;
     private int? _powerConsumption;
 
     public SSDBuilder WithName(string name)
@@ -30,7 +30,7 @@ public class SSDBuilder
 
     public SSDBuilder WithMaximumOperatingSpeed(int speed)
     {
-        _maximumOperatingSpeed = speed;
+        _operatingSpeed = speed;
         return this;
     }
 
@@ -46,7 +46,7 @@ public class SSDBuilder
             _name ?? throw new ArgumentNullException(),
             _connection ?? throw new ArgumentNullException(),
             _capacity ?? throw new ArgumentNullException(),
-            _maximumOperatingSpeed ?? throw new ArgumentNullException(),
+            _operatingSpeed ?? throw new ArgumentNullException(),
             _powerConsumption ?? throw new ArgumentNullException());
     }
 }

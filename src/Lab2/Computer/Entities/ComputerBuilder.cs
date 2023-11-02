@@ -4,11 +4,10 @@ using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.BIOS;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.ComputerCase;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.CPU;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.CPUCooler;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.HDD;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.Memory;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.Motherboard;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.PowerSupply;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.RAM;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.SSD;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.Videocard;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.WiFi;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.XMP;
@@ -18,8 +17,7 @@ namespace Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities;
 public class ComputerBuilder
 {
     private readonly Collection<RAM> _ram;
-    private readonly Collection<SSD> _ssd;
-    private readonly Collection<HDD> _hdd;
+    private readonly Collection<BaseMemory> _memory;
     private Motherboard? _motherboard;
     private CPU? _cpu;
     private BIOS? _bios;
@@ -33,8 +31,7 @@ public class ComputerBuilder
     public ComputerBuilder()
     {
         _ram = new Collection<Components.RAM.RAM>();
-        _ssd = new Collection<Components.SSD.SSD>();
-        _hdd = new Collection<HDD>();
+        _memory = new Collection<BaseMemory>();
     }
 
     public ComputerBuilder WithMotherboard(Motherboard? motherboard)
@@ -97,15 +94,9 @@ public class ComputerBuilder
         return this;
     }
 
-    public ComputerBuilder AddSsd(SSD? ssd)
+    public ComputerBuilder AddMemory(BaseMemory memory)
     {
-        if (ssd != null) _ssd?.Add(ssd);
-        return this;
-    }
-
-    public ComputerBuilder AddHdd(HDD hdd)
-    {
-        _hdd?.Add(hdd);
+        _memory.Add(memory);
         return this;
     }
 
@@ -119,8 +110,7 @@ public class ComputerBuilder
             _ram ?? throw new ArgumentNullException(),
             _xmp ?? throw new ArgumentNullException(),
             _videocard,
-            _ssd,
-            _hdd,
+            _memory ?? throw new ArgumentNullException(),
             _computerCase ?? throw new ArgumentNullException(),
             _powerSupply ?? throw new ArgumentNullException(),
             _wifi);

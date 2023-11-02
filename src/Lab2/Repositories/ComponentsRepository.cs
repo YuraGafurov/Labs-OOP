@@ -8,6 +8,9 @@ using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.CPU;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.CPUCooler;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.HDD;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.Motherboard;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.PowerSupply;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.RAM;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.SSD;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.Videocard;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.WiFi;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.XMP;
@@ -24,9 +27,9 @@ public class ComponentsRepository
     private Collection<CPU> _cpuRepository = new Collection<CPU>();
     private Collection<HDD> _hddRepository = new Collection<HDD>();
     private Collection<Motherboard> _motherboardRepository = new Collection<Motherboard>();
-    private Collection<Computer.Entities.Components.PowerSupply.PowerSupply> _powerSupplyRepository = new Collection<Computer.Entities.Components.PowerSupply.PowerSupply>();
-    private Collection<Computer.Entities.Components.RAM.RAM> _ramRepository = new Collection<Computer.Entities.Components.RAM.RAM>();
-    private Collection<Computer.Entities.Components.SSD.SSD> _ssdRepository = new Collection<Computer.Entities.Components.SSD.SSD>();
+    private Collection<PowerSupply> _powerSupplyRepository = new Collection<PowerSupply>();
+    private Collection<RAM> _ramRepository = new Collection<RAM>();
+    private Collection<SSD> _ssdRepository = new Collection<SSD>();
     private Collection<Videocard> _videocardRepository = new Collection<Videocard>();
     private Collection<WiFi> _wifiRepository = new Collection<WiFi>();
     private Collection<XMP> _xmpRepository = new Collection<XMP>();
@@ -80,17 +83,17 @@ public class ComponentsRepository
         return _motherboardRepository.FirstOrDefault(p => p.Name == name);
     }
 
-    public Computer.Entities.Components.PowerSupply.PowerSupply? GetPowerSupply(string name)
+    public PowerSupply? GetPowerSupply(string name)
     {
         return _powerSupplyRepository.FirstOrDefault(p => p.Name == name);
     }
 
-    public Computer.Entities.Components.RAM.RAM? GetRam(string name)
+    public RAM? GetRam(string name)
     {
         return _ramRepository.FirstOrDefault(p => p.Name == name);
     }
 
-    public Computer.Entities.Components.SSD.SSD? GetSsd(string name)
+    public SSD? GetSsd(string name)
     {
         return _ssdRepository.FirstOrDefault(p => p.Name == name);
     }
@@ -145,17 +148,17 @@ public class ComponentsRepository
         _motherboardRepository.Add(motherboard);
     }
 
-    public void AddPowerSupply(Computer.Entities.Components.PowerSupply.PowerSupply powerSupply)
+    public void AddPowerSupply(PowerSupply powerSupply)
     {
         _powerSupplyRepository.Add(powerSupply);
     }
 
-    public void AddRam(Computer.Entities.Components.RAM.RAM ram)
+    public void AddRam(RAM ram)
     {
         _ramRepository.Add(ram);
     }
 
-    public void AddSsd(Computer.Entities.Components.SSD.SSD ssd)
+    public void AddSsd(SSD ssd)
     {
         _ssdRepository.Add(ssd);
     }
@@ -218,20 +221,20 @@ public class ComponentsRepository
 
     public void DeletePowerSupply(string name)
     {
-        Computer.Entities.Components.PowerSupply.PowerSupply powerSupply = _powerSupplyRepository.FirstOrDefault(p => p.Name == name) ??
+        PowerSupply powerSupply = _powerSupplyRepository.FirstOrDefault(p => p.Name == name) ??
                                                                            throw new InvalidOperationException();
         _powerSupplyRepository.Remove(powerSupply);
     }
 
     public void DeleteRam(string name)
     {
-        Computer.Entities.Components.RAM.RAM ram = _ramRepository.FirstOrDefault(p => p.Name == name) ?? throw new InvalidOperationException();
+        RAM ram = _ramRepository.FirstOrDefault(p => p.Name == name) ?? throw new InvalidOperationException();
         _ramRepository.Remove(ram);
     }
 
     public void DeleteSsd(string name)
     {
-        Computer.Entities.Components.SSD.SSD ssd = _ssdRepository.FirstOrDefault(p => p.Name == name) ?? throw new InvalidOperationException();
+        SSD ssd = _ssdRepository.FirstOrDefault(p => p.Name == name) ?? throw new InvalidOperationException();
         _ssdRepository.Remove(ssd);
     }
 

@@ -4,7 +4,7 @@ using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.BIOS;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.ComputerCase;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.CPU;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.CPUCooler;
-using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.HDD;
+using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.Memory;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.Motherboard;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.PowerSupply;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.RAM;
@@ -20,8 +20,7 @@ public static class Configurator
     public static Result Validate(Entities.Computer computer)
     {
         Collection<RAM>? ram = computer.Ram;
-        Collection<Entities.Components.SSD.SSD>? ssd = computer.Ssd;
-        Collection<HDD>? hdd = computer.Hdd;
+        Collection<BaseMemory> memory = computer.Memory;
         CPU cpu = computer.Cpu;
         Motherboard motherboard = computer.Motherboard;
         PowerSupply powerSupply = computer.PowerSupply;
@@ -47,7 +46,7 @@ public static class Configurator
             return new Result(false, "Invalid Socket");
         }
 
-        if (ram != null && ram.Count > motherboard.RAMSlots)
+        if (ram.Count > motherboard.RAMSlots)
         {
             return new Result(false, "Too much ram");
         }
@@ -73,28 +72,14 @@ public static class Configurator
 
         int maxConsumption = 0;
         maxConsumption += cpu.PowerConsumption;
-        if (ram != null)
+        foreach (RAM r in ram)
         {
-            foreach (RAM? r in ram)
-            {
-                if (r != null) maxConsumption += r.PowerConsumption;
-            }
+            maxConsumption += r.PowerConsumption;
         }
 
-        if (ssd is not null)
+        foreach (BaseMemory m in memory)
         {
-            foreach (Entities.Components.SSD.SSD r in ssd)
-            {
-                maxConsumption += r.PowerConsumption;
-            }
-        }
-
-        if (hdd is not null)
-        {
-            foreach (HDD h in hdd)
-            {
-                maxConsumption += h.PowerConsumption;
-            }
+            maxConsumption += m.PowerConsumption;
         }
 
         if (videocard is not null) maxConsumption += videocard.PowerConsumption;

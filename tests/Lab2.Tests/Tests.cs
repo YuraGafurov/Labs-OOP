@@ -1,3 +1,4 @@
+using System;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.BIOS;
 using Itmo.ObjectOrientedProgramming.Lab2.Computer.Entities.Components.Chipset;
@@ -138,7 +139,7 @@ public class Tests
             .WithComputerCase(repository.GetComputerCase("Case"))
             .WithPowerSupply(repository.GetPowerSupply("Supply"))
             .AddRam(repository.GetRam("Ram"))
-            .AddSsd(repository.GetSsd("SSD"))
+            .AddMemory(repository.GetSsd("SSD") ?? throw new InvalidOperationException())
             .Build();
         Result result = Configurator.Validate(computer);
         Assert.Equal(result, new Result(true, "All good"));
@@ -156,7 +157,7 @@ public class Tests
             .WithComputerCase(repository.GetComputerCase("Case"))
             .WithPowerSupply(repository.GetPowerSupply("Supply"))
             .AddRam(repository.GetRam("Ram"))
-            .AddSsd(repository.GetSsd("SSD"))
+            .AddMemory(repository.GetSsd("SSD") ?? throw new InvalidOperationException())
             .Build();
         Result result = Configurator.Validate(computer);
         Assert.Equal(result, new Result(true, "The system power consumption is slightly higher than the maximum, the assembly is not recommended for use"));
@@ -174,7 +175,7 @@ public class Tests
             .WithComputerCase(repository.GetComputerCase("Case"))
             .WithPowerSupply(repository.GetPowerSupply("Supply"))
             .AddRam(repository.GetRam("Ram"))
-            .AddSsd(repository.GetSsd("SSD"))
+            .AddMemory(repository.GetSsd("SSD") ?? throw new InvalidOperationException())
             .Build();
         Result result = Configurator.Validate(computer);
         Assert.Equal(result, new Result(true, "The system TDP is slightly higher than the maximum, the assembly is not recommended for use"));
@@ -192,7 +193,7 @@ public class Tests
             .WithComputerCase(repository.GetComputerCase("Case"))
             .WithPowerSupply(repository.GetPowerSupply("Supply"))
             .AddRam(repository.GetRam("Ram"))
-            .AddSsd(repository.GetSsd("SSD"))
+            .AddMemory(repository.GetSsd("SSD") ?? throw new InvalidOperationException())
             .Build();
         Result result = Configurator.Validate(computer);
         Assert.Equal(result, new Result(false, "Invalid Socket"));
