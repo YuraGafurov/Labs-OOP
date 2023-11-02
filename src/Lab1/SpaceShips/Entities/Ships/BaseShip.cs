@@ -48,25 +48,21 @@ public abstract class BaseShip
             }
             else if (obstacle is IPhysObstacle)
             {
-                if (Deflector is not null)
+                if (Deflector is null) continue;
+                if (!Deflector.TakeDamage(obstacle))
                 {
-                    if (!Deflector.TakeDamage(obstacle))
+                    Deflector = null;
+                    if (obstacle.Damage <= 0) continue;
+                    if (!Armor.TakeDamage(obstacle))
                     {
-                        Deflector = null;
-                        if (obstacle.Damage > 0)
-                        {
-                            if (!Armor.TakeDamage(obstacle))
-                            {
-                                return Results.SpaceShipDestroyed;
-                            }
-                        }
+                        return Results.SpaceShipDestroyed;
                     }
-                    else
+                }
+                else
+                {
+                    if (!Armor.TakeDamage(obstacle))
                     {
-                        if (!Armor.TakeDamage(obstacle))
-                        {
-                            return Results.SpaceShipDestroyed;
-                        }
+                        return Results.SpaceShipDestroyed;
                     }
                 }
             }
