@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Itmo.ObjectOrientedProgramming.Lab1.Environment.Entities.Obstacles;
@@ -10,8 +9,7 @@ public class NitrinoParticleSpaceNebulae : BaseSpace
     public NitrinoParticleSpaceNebulae(int length, Collection<IObstacle> obstacles)
         : base(length)
     {
-        IEnumerable<IObstacle> selectedObstacles = obstacles.Where(obst => obst is CosmoWhale);
-        foreach (IObstacle obstacle in selectedObstacles)
+        foreach (IObstacle obstacle in obstacles.Where(obst => obst is CosmoWhale))
         {
             Obstacles.Add(obstacle);
         }
