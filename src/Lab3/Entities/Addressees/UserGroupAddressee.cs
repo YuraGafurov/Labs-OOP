@@ -5,23 +5,23 @@ namespace Itmo.ObjectOrientedProgramming.Lab3.Entities.Addressees;
 
 public class UserGroupAddressee : IAddressee
 {
-    private readonly ICollection<UserAddressee> _users = new List<UserAddressee>();
+    private readonly ICollection<IAddressee> _addressees = new List<IAddressee>();
 
-    public void AddUser(UserAddressee user)
+    public void AddAddressee(IAddressee addressee)
     {
-        _users.Add(user);
+        _addressees.Add(addressee);
     }
 
-    public void RemoveUser(UserAddressee user)
+    public void RemoveAddressee(IAddressee addressee)
     {
-        _users.Remove(user);
+        _addressees.Remove(addressee);
     }
 
     public void ReceiveMessage(Message message)
     {
-        foreach (UserAddressee user in _users)
+        foreach (IAddressee addressee in _addressees)
         {
-            user.ReceiveMessage(message);
+            addressee.ReceiveMessage(message);
         }
     }
 }
