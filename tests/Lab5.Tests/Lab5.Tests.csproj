@@ -19,4 +19,9 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\Lab5\Abstractions\Abstractions.csproj" />
+      <ProjectReference Include="..\..\src\Lab5\ApplicationEntity\ApplicationEntity.csproj" />
+    </ItemGroup>
+
 </Project>
