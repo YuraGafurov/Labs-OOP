@@ -52,7 +52,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "src\Lab5\Data
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console", "src\Lab5\Console\Console.csproj", "{1C2825E2-11BB-4227-B859-27CD47838938}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\Lab5\Application\Application.csproj", "{DEF178BF-60E6-4098-823C-4A33ECCA8B19}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "src\Lab5\App\App.csproj", "{DEF178BF-60E6-4098-823C-4A33ECCA8B19}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{56650656-F2C9-4D93-838F-645166E492C3}"
 	ProjectSection(SolutionItems) = preProject

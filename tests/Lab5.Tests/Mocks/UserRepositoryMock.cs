@@ -33,7 +33,6 @@ public class UserRepositoryMock : IUserRepository
             return Task.CompletedTask;
         }
 
-        user = new User(user.Id, user.Pin, money);
         return Task.CompletedTask;
     }
 }

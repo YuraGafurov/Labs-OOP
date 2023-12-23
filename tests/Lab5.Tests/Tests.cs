@@ -31,7 +31,7 @@ public class Tests
         service.AddMoney(1000);
         service.WithdrawMoney(500);
 
-        Assert.Equal(500, curUser.User.Money);
+        Assert.Equal(500, service.ShowMoney());
     }
 
     [Fact]
@@ -77,6 +77,6 @@ public class Tests
 
         service.AddMoney(100);
 
-        Assert.Equal(100, curUser.User.Money);
+        Assert.Equal(100, service.ShowMoney());
     }
 }
